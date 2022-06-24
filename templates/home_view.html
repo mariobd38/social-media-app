@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page %}
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="/">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/register">Sign Up</a>
+</li>
+{% endblock page %}
+
+{% block content %}
+<style> 
+    .form-exterior {
+        background-color: #e7e7e7;
+        border-radius: 8px;
+        width:370px;
+    }
+    
+    .page-title {
+        font-family: 'Lobster', cursive;
+        font-size: 55px;
+    }
+    .hero-header {
+        font-family: 'Hind', sans-serif;
+        font-size: 2rem;
+    }
+    /* .first { */
+        /* margin-left: 50px; */
+    /* } */
+
+</style>
+<div class="d-flex justify-content-center container">
+    <div class="row first d-flex justify-content-center">
+        <div class="form-exterior mt-3 mt-lg-5 order-2 col-md-6 ">
+            <div class=" d-block m-3 p-1">
+                <form method="POST" action="">{% csrf_token %}
+                    {% if error %}
+                        <p style="color:red">{{ error }}</p>
+                    {% endif %}
+                    <div class="row g-3 mb-md-3 mb-4 mt-2">
+                        <div class="form-group col-12 ">
+                            <input type="text" name="username" class="form-control text-center" id="username" placeholder="Email/phone number/username">
+                        </div>
+                    </div>
+    
+                    <div class="form-group  mb-md-3 mb-4">
+                            <input type="password" name="password" class="form-control text-center" id="password" placeholder="Password">
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Log In</button>
+                    </div>
+                    <div class="d-inline-block mb-3 mt-2">
+                        <a class=" forgot">Forgot password?</a>
+    
+                    </div>
+                    
+                </form>
+                <form action="/register">
+                    <hr class="mb-4 mt-2">
+                    <h4 class="mb-3">Are you new here?</h4>
+                    <h6 class="mb-3">Start your journey now!</h6>
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btn btn-primary" type="submit">Sign Up</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <div class="mt-5 order-1 col-md-6 ">
+            <div class="page-title d-flex justify-content-center">
+                Social
+            </div>
+            <div>
+                <p class="hero-header display-5 d-none d-lg-block text-center">Where A Connection Begins.</p>
+    
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+{% endblock content %}
