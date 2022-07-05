@@ -1,7 +1,92 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/ex.css" />
+<!-- <style>
+    .photo {
+    width:10px;
+    height:10px;
+    margin-left: 20px;
+    }
+</style> -->
+{% endblock head %}
+
+
+{% block page %}
+
+<form class="d-flex ms-3" role="search">{% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-light search-btn" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg></button>
+
+</form>
+
+
+{% endblock page %}
+
 {% block content %}
-<h1>Inside user page</h1>
-<ul>
+
+<!-- <div class="profile-div">
+    <div id="half-photo">
+        <img src="/static/images/default_profile_pic1.png" alt="">
+    </div>
+    {% for i in object %}
+    <h2 class="mt-5"> {{ i.first_name }} {{ i.last_name }}</h2>
+    {% endfor %}
+    <hr>
+    <h3>Followers</h3>
+    <h4>0</h4>
+    <hr>
+    <h3>Following</h3>
+    <h4>0</h4>
+    <hr>
+    <div style="text-align:center">
+        <a href="/">View Profile</a>
+    </div>
+    
+</div> -->
+
+
+
+
+<div class="title page-title d-block d-md-none">
+    Social
+</div>
+<div class="d-flex container-fluid"> <!-- justify-content-center -->
+    <div class="row d-flex justify-content-center justify-content-md-end">
+        <div class="profile-div mt-3 ">
+            <div id="half-photo">
+                <img src="/static/images/default_profile_pic1.png" alt="">
+            </div>
+            {% for i in object %}
+            <h2 class="mt-5"> {{ i.first_name }} {{ i.last_name }}</h2>
+            {% endfor %}
+            <hr>
+            <h3>Followers</h3>
+            <h4>0</h4>
+            <hr>
+            <h3>Following</h3>
+            <h4>0</h4>
+            <hr>
+            <div style="text-align:center">
+                <a href="/">View Profile</a>
+            </div>
+            
+        </div>
+            <div class="post-square ms-4 mt-5 ">
+                <div class="top-line">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    
+</div>
+
+<!-- <ul>
     {% for i in object %}
         <td> {{ i.username }} </td>
         <td> {{ i.password }} </td>
@@ -12,5 +97,5 @@
         <td> {{ i.dob }} </td>
         <td> {{ i.gender }} </td>
     {% endfor %}
-</ul>
+</ul> -->
 {% endblock content %}

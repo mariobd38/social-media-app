@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page %}
-<li class="nav-item">
+<li class="nav-item">{% csrf_token %}
     <a class="nav-link active" aria-current="page" href="/">Home</a>
 </li>
 <li class="nav-item">
@@ -49,7 +49,7 @@
                     </div>
                     
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary" type="submit">Log In</button>
+                        <button class="btn btn-primary" type="submit" href="">Log In</button>
                     </div>
                     <div class="d-inline-block mb-3 mt-2">
                         <a class=" forgot">Forgot password?</a>
