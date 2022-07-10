@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 from .views import (
     log_in_view,
-)
-
-from user.views import (
     register_view,
     user_home_view
 )
+
+# from user.views import (
+#     register_view,
+#     user_home_view
+# )
 
 urlpatterns = [
     path('',log_in_view),

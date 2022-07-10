@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/user_home_view.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+</script>
+{% endblock head %}
+
+
+{% block page %}
+
+<form class="d-flex ms-3" role="search">{% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-light search-btn" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg></button>
+
+</form>
+
+
+{% endblock page %}
+
+{% block content %}
+<h1>Test</h1>
+{% endblock content %}

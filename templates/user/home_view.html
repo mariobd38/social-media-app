@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="/static/ex.css" />
+<link rel="stylesheet" href="/static/css/user_home_view.css" />
 <!-- <style>
     .photo {
     width:10px;
@@ -10,6 +10,13 @@
     margin-left: 20px;
     }
 </style> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+</script>
 {% endblock head %}
 
 
@@ -27,38 +34,172 @@
 {% endblock page %}
 
 {% block content %}
+<main>
+    <div class="modal-section">
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 >
+                            {% for i in object %}
+                                Hi {{ i.first_name }}, let's get more info from you!
+                            {% endfor %}
+                        </h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="  ">
+                            <div class=" d-block m-3 p-1">
+                                <form method="POST" >{% csrf_token %}
+                                    <div class="form-group  mb-md-3 mb-4">
+                                        <label for="look-for" class="mb-2">Select your Social mode </label>
+                                        <div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="look-for" id="relationship" value="relationship">
+                                                <label class="form-check-label" for="male">Dating</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="look-for" id="community" value="female">
+                                                <label class="form-check-label" for="female">Friends/Community</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="look-for" id="business" value="other">
+                                                <label class="form-check-label" for="other">Business</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-md-3 mb-4 mt-2">
+                                        <div class="form-group col-6 ">
+                                            <input type="text" name="first_name" class="form-control " id="f_name" placeholder="First Name" required>
+                                        </div>
+                                        <div class="form-group col-6 ">
+                                            <input type="text" name="last_name" class="form-control " id="l_name" placeholder="Last Name" required>
+                                        </div>
+                                    </div>
 
-<!-- <div class="profile-div">
-    <div id="half-photo">
-        <img src="/static/images/default_profile_pic1.png" alt="">
+                                    <!-- <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm state">
+                                        <option selected>State</option>
+                                        {% for abbreviation,state in states.items %}
+                                            <option value="{{ key }}">{{ abbreviation }} | {{ state }}</option>
+                                        {% endfor %}
+                                    </select> -->
+
+                                    <div class="card-body text-center">
+                                        <select name="country" class="countries form-select form-select-sm mb-3" id="countryId">
+                                            <option value="">Select Country</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select name="state" class="states form-select form-select-sm mb-3" id="stateId">
+                                            <option value="">Select State</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select name="city" class="cities form-select form-select-sm mb-3" id="cityId">
+                                            <option value="">Select City</option>
+                                        </select>
+                                    </div>
+                                    
+                
+                                    <div class="d-grid gap-2 modal-footer">
+                                        <input type="submit" id="save" class="btn btn-primary"></input>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
-    {% for i in object %}
-    <h2 class="mt-5"> {{ i.first_name }} {{ i.last_name }}</h2>
-    {% endfor %}
-    <hr>
-    <h3>Followers</h3>
-    <h4>0</h4>
-    <hr>
-    <h3>Following</h3>
-    <h4>0</h4>
-    <hr>
-    <div style="text-align:center">
-        <a href="/">View Profile</a>
-    </div>
+
+
+    <div class="main-section">
+        <div class="title page-title d-block d-md-none">
+            Social
+        </div>
+        <div class="container">
+            <div class="main-section-data">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+                        <div class="main-left-sidebar">
+                            <div class="user-data full-width mt-5">
+                                <div class="user-profile">
+                                    <div class="username">
+                                        <div class="user-pic">
+                                            <img src="/static/images/profile-picture.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <h3>{{ object.first_name }}</h3>
+                                        {% for i in object %} 
+                                            <h3> {{ i.first_name }} {{ i.last_name }}</h3> 
+                                        {% endfor %}
+                                        <span>Occupation</span>
+                                    </div>
+                                </div>
+                                <ul class="user-fw-status">
+                                    <li>
+                                        <h4>Following</h4>
+                                        <span>0</span>
+                                    </li>
+                                    <li>
+                                        <h4>Followers</h4>
+                                        <span>0</span>
+                                    </li>
+                                    <li>
+                                        <a href="/" title="">View Profile</a>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                        <!-- <div class="profile-div mt-3 ">
+                            <div id="half-photo">
+                                <div class="portrait">
+                                    <img src="/static/images/default_profile_pic1.png" alt="">
+                                </div>
+                                
+                            </div>
+                            {% for i in object %}
+                            <h2 class="mt-5"> {{ i.first_name }} {{ i.last_name }}</h2>
+                            {% endfor %}
+                            <hr>
+                            <h3>Followers</h3>
+                            <h4>0</h4>
+                            <hr>
+                            <h3>Following</h3>
+                            <h4>0</h4>
+                            <hr>
+                            <div style="text-align:center">
+                                <a href="/">View Profile</a>
+                            </div>
+                            
+                        </div> -->
+                    </div>
+                    <div class="col-lg-6 col-md-8 no-pd">
+                        
+                    </div>
+                    <div class="col-lg-3 pd-right-none no-pd">
+
+                    </div>
+                </div>
     
-</div> -->
+            </div>
+        </div>
+       
+    </div>
+</main>
 
 
 
-
-<div class="title page-title d-block d-md-none">
-    Social
-</div>
-<div class="d-flex container-fluid"> <!-- justify-content-center -->
-    <div class="row d-flex justify-content-center justify-content-md-end">
+<!-- <div class="d-flex container"> 
+    <div class="row d-flex justify-content-center ">
         <div class="profile-div mt-3 ">
             <div id="half-photo">
-                <img src="/static/images/default_profile_pic1.png" alt="">
+                <div class="portrait">
+                    <img src="/static/images/default_profile_pic1.png" alt="">
+                </div>
+                
             </div>
             {% for i in object %}
             <h2 class="mt-5"> {{ i.first_name }} {{ i.last_name }}</h2>
@@ -81,11 +222,12 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
     
     
 </div>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
 <!-- <ul>
     {% for i in object %}
         <td> {{ i.username }} </td>

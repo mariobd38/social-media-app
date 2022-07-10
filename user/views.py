@@ -1,13 +1,13 @@
 import datetime
 from datetime import date
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from accounts.models import Account
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-
 # Create your views here.
 
 def register_view(request):
+
     context = {}
     if request.method == "POST":
         first_name = request.POST.get("first_name")
@@ -48,10 +48,6 @@ def register_view(request):
             login(request,user)
             
             return render(request,"user/home_view.html",context=context)
-     
-        # return redirect('/user',context=context)
-
-        # return render(request,"user/home_view.html",{})
         
     return render(request,"register.html",{})
 
@@ -63,4 +59,12 @@ def validatePassword(password,confirm_password):
         context = {"error": "Password must be at least 8 characters longer"}
     return context
 def user_home_view(request):
+
     return render(request,"user/home_view.html",{})
+def user_modal_data():
+    import json
+    f = open('static/json-files/us_states.json')
+    data = json.load(f)
+    for i in range(len(data)):
+        print(data[i]['abbreviation'],data[i]['name'])
+    f.close()
